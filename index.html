@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<!--
+   Licensed to the Apache Software Foundation (ASF) under one
+   or more contributor license agreements.  See the NOTICE file
+   distributed with this work for additional information
+   regarding copyright ownership.  The ASF licenses this file
+   to you under the Apache License, Version 2.0 (the
+   "License"); you may not use this file except in compliance
+   with the License.  You may obtain a copy of the License at
+   
+   http://www.apache.org/licenses/LICENSE-2.0
+   
+   Unless required by applicable law or agreed to in writing,
+   software distributed under the License is distributed on an
+   "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+    KIND, either express or implied.  See the License for the
+   specific language governing permissions and limitations
+   under the License.
+   -->
+<html>
+   <head>
+      <!--
+         Customize this policy to fit your own app's needs. For more guidance, see:
+             https://github.com/apache/cordova-plugin-whitelist/blob/master/README.md#content-security-policy
+         Some notes:
+             * gap: is required only on iOS (when using UIWebView) and is needed for JS->native communication
+             * https://ssl.gstatic.com is required only on Android and is needed for TalkBack to function properly
+             * Disables use of inline scripts in order to mitigate risk of XSS vulnerabilities. To change this:
+                 * Enable inline JS: add 'unsafe-inline' to default-src
+         -->
+<!--      <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *; img-src 'self' data: content:;"> -->
+      <meta name="format-detection" content="telephone=no">
+      <meta name="msapplication-tap-highlight" content="no">
+      <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+<!--      <link rel="stylesheet" type="text/css" href="css/index.css"> -->
+      <link rel="stylesheet" href="css/jquery.mobile-1.4.5.min.css">
+<!--      <link rel="stylesheet" href="jquery.mobile.structure-1.4.5.css"> -->
+<!--      <link rel="stylesheet" type="text/css" href="css/ui5/index.css"> -->
+
+
+<link type="text/css" rel="stylesheet" href="css/ui5/library.css" data-sap-ui-ready="true">
+<link type="text/css" rel="stylesheet" href="css/ui5/library1.css" data-sap-ui-ready="true">
+<link type="text/css" rel="stylesheet" href="css/ui5/library2.css" data-sap-ui-ready="true">
+<link type="text/css" rel="stylesheet" href="css/ui5/library3.css" data-sap-ui-ready="true">
+<link type="text/css" rel="stylesheet" href="css/ui5/library4.css" data-sap-ui-ready="true">
+<link type="text/css" rel="stylesheet" href="css/ui5/library5.css" data-sap-ui-ready="true">
+<link type="text/css" rel="stylesheet" href="css/ui5/library6.css" data-sap-ui-ready="true">
+<link type="text/css" rel="stylesheet" href="css/ui5/library7.css" data-sap-ui-ready="true">
+<link type="text/css" rel="stylesheet" href="css/ui5/library8.css" data-sap-ui-ready="true">
+<link type="text/css" rel="stylesheet" href="css/ui5/library9.css" data-sap-ui-ready="true">
+<link type="text/css" rel="stylesheet" href="css/ui5/library10.css" data-sap-ui-ready="true">
+<link type="text/css" rel="stylesheet" href="css/ui5/library11.css" data-sap-ui-ready="true">
+<link type="text/css" rel="stylesheet" href="css/ui5/library12.css" data-sap-ui-ready="true">
+<link type="text/css" rel="stylesheet" href="css/ui5/style.css" data-sap-ui-ready="true">
+
+      <script type="text/javascript" src="js/jquery-1.12.4.min.js"></script>
+<script>
+			$(document).bind('mobileinit',function(){
+			    $.mobile.keepNative = "select,input,button";
+			});
+			 $(window).on("navigate", function (event) {
+			     event.preventDefault();
+			     window.history.forward(1);
+			
+			});
+
+$("div[role='tab']").click(function(){  
+	break;	
+	$("div[role='tab']").attr("aria-selected","false"); //deselect all the tabs 
+ 	$(this).attr("aria-selected","true");  // select this tab
+	var tabpanid= $(this).attr("aria-controls"); //find out what tab panel this tab controls  
+   var tabpan = $("#"+tabpanid);  
+	$("div[role='tabpanel']").attr("aria-hidden","true"); //hide all the panels 
+	tabpan.attr("aria-hidden","false");  // show our panel
+ });
+        </script>
+
+      <script type="text/javascript" src="js/jquery.mobile-1.4.5.min.js"></script>
+      <script type="text/javascript" src="cordova.js"></script>
+      <script type="text/javascript" src="js/index.js"></script>
+
+
+      <title>Process Manager App</title>
+   </head>
+   <body>
+      <div data-role="page" id="login" data-dom-cache="true" data-enhance="false">
+         <div data-role="main" id="ui-content">
+			<header class="sapMPageHeader">
+			   <div id="header" role="toolbar" class="sapContrastPlus sapMBar sapMBar-CTX sapMContent-CTX sapMHeader-CTX sapMIBar sapMIBar-CTX sapMPageHeader">
+			      <div id="headerBarLeft" class="sapMBarContainer sapMBarLeft"></div>
+			      <div id="headerBarMiddle" class="sapMBarMiddle">
+			         <div id="headerBarPH" style="width:100%" class="sapMBarContainer sapMBarPH">
+			            <div id="title" role="heading" class="sapMBarChild sapMTitle sapMTitleMaxWidth sapMTitleNoWrap sapMTitleStyleAuto sapUiSelectable">
+							<span id="titleinner">Process Manager</span></div>
+			         </div>
+			      </div>
+			      <div id="headerBarRight" class="sapMBarContainer sapMBarRight"></div>
+			   </div>
+			</header>
+			
+			<section id="__page0-cont" class="sapMPageEnableScrolling" style="overflow-x: hidden; overflow-y: auto;">
+			<!--   <section id="__panel0" class="sapMPanel sapUiResponsiveMargin" style="width:100%;height:auto" role="form" aria-labelledby="__panel0-header">
+			      <div class="sapMPanelBGTransparent sapMPanelContent">
+			   </section> -->
+			   <div id="form" class="sapUiForm sapUiFormEdit sapUiFormEdit-CTX sapUiFormLblColon sapUiFormM" role="form" aria-labelledby="title">
+			      <div id="layout" class="sapUiFormBackgrTranslucent sapUiFormResGrid">
+			         <h4 id="title" class="sapUiFormTitle sapUiFormTitleH4">
+			           <span class="sapUiIcon sapUiIconMirrorInRTL" style="font-family: SAP-icons;" data-sap-ui-icon-content="" role="presentation" id="icon" aria-label="login"></span>Log In</h4>
+			         <div id="panel" class="sapUiRGLContainer">
+			            <div class="sapUiRGLContainerCont">
+			               <div id="grid" class="sapUiFormResGridCont sapUiRespGrid sapUiRespGridHSpace0 sapUiRespGridMedia-Std-Desktop sapUiRespGridVSpace0">
+			
+			                  <div class="sapUiFormElementLbl sapUiRespGridBreak sapUiRespGridSpanL2 sapUiRespGridSpanM2 sapUiRespGridSpanS12 sapUiRespGridSpanXL2">
+			                    <label id="usernamelabel" for="username" style="font-weight:bold;width:100%;text-align:left" class="sapMLabel sapMLabelRequired sapUiSelectable">
+			                      <bdi id="usernamelabelbdi">User Name</bdi>
+			                    </label>
+			                  </div>
+			                  <div class="sapUiRespGridSpanL10 sapUiRespGridSpanM10 sapUiRespGridSpanS12 sapUiRespGridSpanXL10" >
+			                     <div id="usernameouter" style="width:100%" class="sapMInput sapMInputBase sapMInputBaseWidthPadding">
+			                        <div class="sapMInputDivWrapper"><input id="username" placeholder="Enter your User Name here" value="" aria-required="true" aria-labelledby="usernamelabel" type="text" class="sapMInputBaseInner"></div>
+			<!-- <span id="usernamelabel" aria-hidden="true" class="sapUiInvisibleText">Enter your User Name here</span> -->
+			                     </div>
+			                  </div>
+			
+			                  <div class="sapUiFormElementLbl sapUiRespGridBreak sapUiRespGridSpanL2 sapUiRespGridSpanM2 sapUiRespGridSpanS12 sapUiRespGridSpanXL2">
+			                    <label id="passwordlabel" for="password" style="font-weight:bold;width:100%;text-align:left" class="sapMLabel sapMLabelRequired sapUiSelectable">
+			                      <bdi id="passwordlabelbdi">Password</bdi>
+			                    </label>
+			                  </div>
+			                  <div class="sapUiRespGridSpanL10 sapUiRespGridSpanM10 sapUiRespGridSpanS12 sapUiRespGridSpanXL10">
+			                     <div id="passwordouter" style="width:100%" class="sapMInput sapMInputBase sapMInputBaseWidthPadding">
+			                        <div class="sapMInputDivWrapper"><input id="password" placeholder="Enter your Password here" value="" aria-required="true" aria-labelledby="passwordlabel" type="password" class="sapMInputBaseInner"></div>
+			<span id="passwordlabel" aria-hidden="true" class="sapUiInvisibleText">Enter your Password here</span>
+			                     </div>
+			                  </div>
+			
+			               </div>
+			            </div>
+			         </div>
+			      </div>
+			   </div>
+
+			   <div id="loginbuttonbox" data-enhance="false" class="sapMFlexBox sapMFlexBoxAlignContentStretch sapMFlexBoxAlignItemsCenter sapMFlexBoxBGTransparent sapMFlexBoxJustifyCenter sapMFlexBoxWrapNoWrap sapMHBox" style="height:100px">
+			     <div id="loginbuttonouter" style="order:0;flex-grow:0;flex-shrink:1;flex-basis:auto;min-height:auto;min-width:auto" class="sapMFlexBoxBGTransparent sapMFlexItem sapMFlexItemAlignAuto">
+			       <button id="loginbutton" data-enhance="false" onclick='$.mobile.pageContainer.pagecontainer("change", "#menu");' class="sapMBtn sapMBtnBase sapMBtnInverted sapUiSmallMarginEnd" style="width:100%">
+			         <span id="loginbuttoninner" class="sapMBtnEmphasized sapMBtnHoverable sapMBtnIconFirst sapMBtnInner sapMBtnText sapMFocusable">
+			           <span id="loginbuttonimg"  role="presentation" aria-hidden="true" data-sap-ui-icon-content="" class="sapMBtnCustomIcon sapMBtnIcon sapMBtnIconLeft sapUiIcon" style="font-family:'SAP-icons'"></span>
+			           <span class="sapMBtnContent" id="loginbuttontext"><bdi>Log In</bdi></span>
+			         </span>
+			       </button>
+			     </div>
+			   </div>
+
+			</section>
+         </div>
+         <div data-role="footer" data-position="fixed">
+            <h1>© 2018</h1>
+         </div>
+      </div>
+
+      <div data-role="page" id="menu" data-dom-cache="true">
+         <div data-role="main" id="ui-content">
+                <div id="__bar0" data-sap-ui="__bar0" data-sap-ui-fastnavgroup="true" role="toolbar" class="sapMBar sapMBar-CTX sapMHeader-CTX sapMIBar sapMIBar-CTX">
+                    <div id="__bar0-BarLeft" class="sapMBarContainer sapMBarLeft" style="width:100%">
+                    </div>
+                    <div id="__bar0-BarMiddle" class="sapMBarMiddle">
+                        <div id="__bar0-BarPH" class="sapMBarContainer sapMBarPH">Menu</div>
+                    </div>
+                    <div id="__bar0-BarRight" class="sapMBarContainer sapMBarRight"></div>
+                </div>
+<!--            <ul data-role="listview" data-inset="true">
+               <li data-role="list-divider"></li>
+               <li data-icon="grid"><a href="" onclick='$.mobile.pageContainer.pagecontainer("change", "#wolist");'>Work Orders</a></li>
+               <li data-icon="grid"><a href="" onclick='$.mobile.pageContainer.pagecontainer("change", "#wohist");'>History</a></li>
+               <li data-icon="cloud"><a href="" onclick='$.mobile.pageContainer.pagecontainer("change", "#map");'>Map</a></li>
+
+
+
+<li id="__item0-__clone0" data-sap-ui="__item0-__clone0" tabindex="0" role="option" aria-selected="true" aria-labelledby="__item0-__clone0-titleText __item0-__clone0-ObjectNumber orderbrowser---master--companyName-__clone0 __attribute0-__clone0 __status0-__clone0" class="sapMLIB sapMLIB-CTX sapMLIBActionable sapMLIBFocusable sapMLIBHoverable sapMLIBShowSeparator sapMLIBTypeInactive sapMObjLItem sapMObjLListModeDiv sapMLIBSelected" aria-posinset="1" aria-setsize="10">
+   <div class="sapMLIBContent" id="__item0-__clone0-content">
+      <div class="sapMObjLTopRow">
+         <div style="display:-webkit-box;overflow:hidden"><span id="__item0-__clone0-titleText" data-sap-ui="__item0-__clone0-titleText" class="sapMObjLTitle sapMText sapMTextMaxWidth sapUiSelectable" style="text-align:left"><span id="__item0-__clone0-titleText-inner" class="sapMTextLineClamp sapMTextMaxLine" style="-webkit-line-clamp:2">Work Orders</span></span></div>
+      </div>
+   </div>
+</li>
+
+
+<li tabindex="0" role="option" aria-selected="false" class="sapMLIB sapMLIB-CTX sapMLIBActionable sapMLIBFocusable sapMLIBHoverable sapMLIBShowSeparator sapMLIBTypeInactive sapMObjLItem sapMObjLListModeDiv" aria-setsize="10">
+   <div class="sapMLIBContent">
+      <div class="sapMObjLTopRow">
+         <div style="display:-webkit-box;overflow:hidden"><span class="sapMObjLTitle sapMText sapMTextMaxWidth sapUiSelectable" style="text-align:left"><span class="sapMTextLineClamp sapMTextMaxLine" style="-webkit-line-clamp:2">History</span></span></div>
+      </div>
+   </div>
+</li>
+
+
+<li tabindex="0" role="option" aria-selected="false" class="sapMLIB sapMLIB-CTX sapMLIBActionable sapMLIBFocusable sapMLIBHoverable sapMLIBShowSeparator sapMLIBTypeInactive sapMObjLItem sapMObjLListModeDiv" aria-setsize="10">
+   <div class="sapMLIBContent">
+      <div class="sapMObjLTopRow">
+         <div style="display:-webkit-box;overflow:hidden"><span class="sapMObjLTitle sapMText sapMTextMaxWidth sapUiSelectable" style="text-align:left"><span class="sapMTextLineClamp sapMTextMaxLine" style="-webkit-line-clamp:2">Map</span></span></div>
+      </div>
+   </div>
+</li>
+
+
+            </ul>
+-->
+
+
+
+
+<a href="" onclick='$.mobile.pageContainer.pagecontainer("change", "#wolist");' style="text-decoration: none;">
+<div role="button" tabindex="0" class="OneByOne sapMGT sapMGTScopeDisplay sapMGTStateLoaded sapMPointer sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout"><div class="OneByOne sapMGTHdrContent"><div class="sapMGTHdrTxt"><span class="sapMGTTitle sapMText sapMTextMaxWidth sapUiSelectable" style="text-align:left"><span class="sapMTextLineClamp sapMTextMaxLine" style="-webkit-line-clamp:2">Work Order List</span></span></div><div class="sapMGTSubHdrTxt">Assigned work</div></div><div class="sapMGTContent" id="__tile36-content"><div class="sapMFrameTypeAuto sapMTileCnt"><div class="sapMTileCntContent"><div class="sapMImageContent sapMTcInnerMarker">
+<span id="__content0-icon-image" role="img" data-sap-ui-icon-content="" class="sapMImageContentImageIcon sapUiIcon sapUiIconMirrorInRTL" style="font-family:'SAP-icons'"></span>
+</div></div><div class="sapMTileCntFooterTextColorNeutral sapMTileCntFtrTxt"></div></div></div><div class="sapMGTWithoutImageHoverOverlay"></div></div>
+</a>
+
+
+<a href="" onclick='$.mobile.pageContainer.pagecontainer("change", "#map");' style="text-decoration: none;">
+<div role="button" tabindex="0" class="OneByOne sapMGT sapMGTScopeDisplay sapMGTStateLoaded sapMPointer sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout"><div class="OneByOne sapMGTHdrContent"><div class="sapMGTHdrTxt"><span class="sapMGTTitle sapMText sapMTextMaxWidth sapUiSelectable" style="text-align:left"><span class="sapMTextLineClamp sapMTextMaxLine" style="-webkit-line-clamp:2">Map</span></span></div><div class="sapMGTSubHdrTxt">Work on map</div></div><div class="sapMGTContent"><div class="sapMFrameTypeAuto sapMTileCnt"><div class="sapMTileCntContent"><div class="sapMImageContent sapMTcInnerMarker">
+<span id="__content0-icon-image" role="img" data-sap-ui-icon-content="" class="sapMImageContentImageIcon sapUiIcon sapUiIconMirrorInRTL" style="font-family:'SAP-icons'"></span>
+</div></div><div class="sapMTileCntFooterTextColorNeutral sapMTileCntFtrTxt"></div></div></div><div class="sapMGTWithoutImageHoverOverlay"></div></div>
+</a>
+
+
+<a href="" onclick='$.mobile.pageContainer.pagecontainer("change", "#wohist");' style="text-decoration: none;">
+<div role="button" tabindex="0" class="OneByOne sapMGT sapMGTScopeDisplay sapMGTStateLoaded sapMPointer sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout"><div class="OneByOne sapMGTHdrContent"><div class="sapMGTHdrTxt"><span class="sapMGTTitle sapMText sapMTextMaxWidth sapUiSelectable" style="text-align:left"><span class="sapMTextLineClamp sapMTextMaxLine" style="-webkit-line-clamp:2">History</span></span></div><div class="sapMGTSubHdrTxt">Recent work</div></div><div class="sapMGTContent" id="__tile36-content"><div class="sapMFrameTypeAuto sapMTileCnt"><div class="sapMTileCntContent"><div class="sapMImageContent sapMTcInnerMarker">
+<span id="__content0-icon-image" role="img" data-sap-ui-icon-content="" class="sapMImageContentImageIcon sapUiIcon sapUiIconMirrorInRTL" style="font-family:'SAP-icons'"></span>
+</div></div><div class="sapMTileCntFooterTextColorNeutral sapMTileCntFtrTxt"></div></div></div><div class="sapMGTWithoutImageHoverOverlay"></div></div>
+</a>
+
+
+
+
+         </div>
+         <div data-role="footer" data-position="fixed">
+            <h1>© 2018</h1>
+         </div>
+      </div>
+
+      <div data-role="page" id="wolist" data-dom-cache="true">
+         <div data-role="header">
+                <div id="__bar0" data-sap-ui="__bar0" data-sap-ui-fastnavgroup="true" role="toolbar" class="sapMBar sapMBar-CTX sapMHeader-CTX sapMIBar sapMIBar-CTX">
+                    <div id="__bar0-BarLeft" class="sapMBarContainer sapMBarLeft" style="width:100%">
+                        <button id="buttonwolist2menu" onclick='$.mobile.pageContainer.pagecontainer("change", "#menu");' class="sapMBarChild sapMBtn sapMBtnBase" style="width:auto"><span id="button2wolistinner" class="sapMBtnBack sapMBtnHoverable sapMBtnInner sapMFocusable"><span id="__button2-iconBtn" data-sap-ui="__button2-iconBtn" role="presentation" aria-hidden="true" data-sap-ui-icon-content="" class="sapMBtnIcon sapMBtnIconLeft sapUiIcon sapUiIconMirrorInRTL" style="font-family:'SAP-icons'"></span></span>
+                        </button>
+                    </div>
+                    <div id="__bar0-BarMiddle" class="sapMBarMiddle">
+                        <div id="__bar0-BarPH" class="sapMBarContainer sapMBarPH">Work Orders</div>
+                    </div>
+                    <div id="__bar0-BarRight" class="sapMBarContainer sapMBarRight"></div>
+                </div>
+
+<!--            <a class="ui-btn-left ui-btn ui-btn-inline ui-mini ui-corner-all ui-btn-icon-left"
+               id="mru2menu" onclick='$.mobile.pageContainer.pagecontainer("change", "#menu");'>Back</a> -->
+
+         </div>
+         <div data-role="main" class="ui-content">
+            <form class="ui-filterable">
+               <input data-type="search" id="txtKeywordWoListLevel1"/>
+            </form>
+            <ul data-role="listview" data-filter="true"
+               data-input="#txtKeywordWoListLevel1"
+               data-inset="true"
+				data-enhance="true"
+               >
+
+<li id="listitem" tabindex="0" role="option" aria-selected="true" class="sapMLIB sapMLIB-CTX sapMLIBActionable sapMLIBFocusable sapMLIBHoverable sapMLIBShowSeparator sapMLIBTypeInactive sapMObjLItem sapMObjLListModeDiv sapMLIBSelected" aria-posinset="1" aria-setsize="10" onclick='$.mobile.pageContainer.pagecontainer("change", "#woobject");'>
+   <div class="sapMLIBContent" id="itemcontent">
+      <div class="sapMObjLTopRow">
+         <div class="sapMObjLNumberDiv">
+            <div id="itemobjectnumber" class="sapMObjectNumber sapMObjectNumberEmph sapMObjectNumberStatusNone" style="text-align: right;">
+               <span class="sapMObjectNumberText">2016-11-21</span>  
+            </div>
+         </div>
+         <div style="display:-webkit-box;overflow:hidden"><span id="itemtitleText" class="sapMObjLTitle sapMText sapMTextMaxWidth sapUiSelectable" style="text-align:left"><span id="itemtitleTextinner" class="sapMTextLineClamp sapMTextMaxLine" style="-webkit-line-clamp:2">Order 7991</span></span></div>
+      </div>
+      <div style="clear: both;"></div>
+      <div class="sapMObjLBottomRow">
+         <div class="sapMObjLAttrRow">
+            <div class="sapMObjLAttrDiv">
+               <div id="itemobjectattribute" class="sapMObjectAttributeDiv"><span id="itemobjectattributetext" class="sapMText sapMTextMaxWidth sapMTextNoWrap sapUiSelectable" style="text-align:left">Berglunds snabbköp</span></div>
+            </div>
+            <div class="sapMObjLStatusDiv">
+               <div id="itemstatus" class="sapMObjStatus sapMObjStatusSuccess"><span id="itemstatustext" class="sapMObjStatusText">In time</span></div>
+            </div>
+         </div>
+         <div class="sapMObjLAttrRow">
+            <div class="sapMObjLAttrDiv" style="width:100%">
+               <div id="itemattribute" class="sapMObjectAttributeDiv"><span id="itemattributetext" class="sapMText sapMTextMaxWidth sapMTextNoWrap sapUiSelectable" style="text-align:left">Shipped: 25 nov. 2016</span></div>
+            </div>
+         </div>
+      </div>
+   </div>
+</li>
+
+
+<li id="listitem" tabindex="0" role="option" aria-selected="false" class="sapMLIB sapMLIB-CTX sapMLIBActionable sapMLIBFocusable sapMLIBHoverable sapMLIBShowSeparator sapMLIBTypeInactive sapMObjLItem sapMObjLListModeDiv" aria-posinset="3" aria-setsize="10" onclick='$.mobile.pageContainer.pagecontainer("change", "#woobject");'>
+   <div class="sapMLIBContent" id="itemcontent">
+      <div class="sapMObjLTopRow">
+         <div class="sapMObjLNumberDiv">
+            <div id="itemobjectNumber" class="sapMObjectNumber sapMObjectNumberEmph sapMObjectNumberStatusNone" style="text-align: right;"><span class="sapMObjectNumberText">2016-10-06</span>  </div>
+         </div>
+         <div style="display:-webkit-box;overflow:hidden"><span id="itemtitleText" class="sapMObjLTitle sapMText sapMTextMaxWidth sapUiSelectable" style="text-align:left"><span id="itemtitleTextinner" class="sapMTextLineClamp sapMTextMaxLine" style="-webkit-line-clamp:2">Order 7375</span></span></div>
+      </div>
+      <div style="clear: both;"></div>
+      <div class="sapMObjLBottomRow">
+         <div class="sapMObjLAttrRow">
+            <div class="sapMObjLAttrDiv">
+               <div id="itemobjectattribute" class="sapMObjectAttributeDiv"><span id="__text22" class="sapMText sapMTextMaxWidth sapMTextNoWrap sapUiSelectable" style="text-align:left">Around the Horn</span></div>
+            </div>
+            <div class="sapMObjLStatusDiv">
+               <div id="itemstatus" class="sapMObjStatus sapMObjStatusSuccess"><span id="itemstatustext" class="sapMObjStatusText">In time</span></div>
+            </div>
+         </div>
+         <div class="sapMObjLAttrRow">
+            <div class="sapMObjLAttrDiv" style="width:100%">
+               <div id="itemattribute" class="sapMObjectAttributeDiv"><span id="itemattributetext" class="sapMText sapMTextMaxWidth sapMTextNoWrap sapUiSelectable" style="text-align:left">Shipped: 14 okt. 2016</span></div>
+            </div>
+         </div>
+      </div>
+   </div>
+</li>
+
+
+
+            </ul>
+         </div>
+         <div data-role="footer" data-position="fixed">
+            <h1>© 2018</h1>
+         </div>
+      </div>
+
+      <div data-role="page" id="woobject" data-dom-cache="true" data-enhance="false">
+	
+
+<div id="__component0---Details" style="width: 100%; height: 100%;" class="sapMNavItem sapUiView sapUiXMLView">
+    <div id="__app1" class="sapMApp sapMNav sapUiGlobalBackgroundColor" style="width:100%">
+        <div id="__app1-BG" class="sapMAppBG sapUiGlobalBackgroundImage"></div>
+        <div id="__page1" data-sap-ui="__page1" class="sapMNavItem sapMPage sapMPageBgStandard sapMPageBusyCoversAll sapMPageWithFooter">
+            <section id="__page1-cont" class="sapMPageEnableScrolling" style="overflow-x: hidden; overflow-y: auto;">
+                <div id="__bar0" data-sap-ui="__bar0" data-sap-ui-fastnavgroup="true" role="toolbar" class="sapMBar sapMBar-CTX sapMHeader-CTX sapMIBar sapMIBar-CTX">
+                    <div id="__bar0-BarLeft" class="sapMBarContainer sapMBarLeft" style="width:100%">
+                        <button id="button2wolist" onclick='$.mobile.pageContainer.pagecontainer("change", "#wolist");' class="sapMBarChild sapMBtn sapMBtnBase" style="width:auto"><span id="button2wolistinner" class="sapMBtnBack sapMBtnHoverable sapMBtnInner sapMFocusable"><span id="__button2-iconBtn" data-sap-ui="__button2-iconBtn" role="presentation" aria-hidden="true" data-sap-ui-icon-content="" class="sapMBtnIcon sapMBtnIconLeft sapUiIcon sapUiIconMirrorInRTL" style="font-family:'SAP-icons'"></span></span>
+                        </button>
+                    </div>
+                    <div id="__bar0-BarMiddle" class="sapMBarMiddle">
+                        <div id="__bar0-BarPH" class="sapMBarContainer sapMBarPH">Work Order Details</div>
+                    </div>
+                    <div id="__bar0-BarRight" class="sapMBarContainer sapMBarRight"></div>
+                </div>
+                <div id="__component0---Details--" data-sap-ui="__component0---Details--" class="sapContrastPlus sapMOH sapMOHBgSolid" role="region" aria-labelledby="__component0---Details---titleText-inner">
+                    <div class="sapMOHTopRow">
+                        <div id="__component0---Details---titlediv" class="sapMOHTitleDiv sapMOHTitleDivFull sapMOHTitleIcon">
+                            <div class="sapMOHIcon"><span id="__component0---Details---img" data-sap-ui="__component0---Details---img" role="presentation" aria-hidden="true" data-sap-ui-icon-content="" class="sapUiIcon sapUiIconMirrorInRTL" style="font-family:'SAP-icons';font-size:2.5rem"></span></div>
+<a role="link" aria-haspopup="true" id="__component0---Details---title" tabindex="0" class="sapMOHTitle sapMOHTitleActive"><h1><span id="__component0---Details---titleText" data-sap-ui="__component0---Details---titleText" class="sapMText sapMTextMaxWidth sapUiSelectable" style="text-align:left"><span id="__component0---Details---titleText-inner" class="sapMTextLineClamp sapMTextMaxLine" style="-webkit-line-clamp:3">Work Order Description</span></span></h1></a>
+                        </div>
+						<div id="__component0---Details---numberdiv" class="sapMOHNumberDiv"><div id="__component0---Details---number" data-sap-ui="__component0---Details---number" class="sapMObjectNumber sapMObjectNumberStatusNone" style="text-align:right"><span class="sapMObjectNumberText">Work Order ID</span>  <span class="sapMObjectNumberUnit">Work Order activity text</span></div></div>
+                        <div class="sapMOHDivider"></div>
+                    </div>
+					<div class="sapMOHBottomRow"><div class="sapMOHAttrRow"><div class="sapMOHStatus"><div id="__component0---Details--status" data-sap-ui="__component0---Details--status" class="sapMObjStatus sapMObjStatusSuccess" aria-describedby="__component0---Details--statussapSRH"><span id="__component0---Details--status-title" dir="ltr" class="sapMObjStatusTitle">Status:</span><span id="__component0---Details--status-icon" class="sapMObjStatusIcon"><span id="__component0---Details--status-icon" data-sap-ui="__component0---Details--status-icon" role="presentation" aria-hidden="true" data-sap-ui-icon-content="" class="sapUiIcon sapUiIconMirrorInRTL" style="font-family:'SAP-icons'"></span></span><span id="__component0---Details--status-text" class="sapMObjStatusText">Not Started</span><span id="__component0---Details--statussapSRH" class="sapUiInvisibleText" aria-hidden="false">Entry successfully validated</span></div></div></div><div class="sapMOHAttrRow"><div class="sapMOHStatus"><div id="__status2" data-sap-ui="__status2" class="sapMObjStatus sapMObjStatusNone"><span id="__status2-icon" class="sapMObjStatusIcon"><span id="__status2-icon" data-sap-ui="__status2-icon" role="presentation" aria-hidden="true" data-sap-ui-icon-content="" class="sapUiIcon sapUiIconMirrorInRTL" style="font-family:'SAP-icons'"></span></span><span id="__status2-text" class="sapMObjStatusText">41 GUAVA ROAD, TAFELSIG</span></div></div></div><div class="sapMOHDivider"></div></div>
+                    <div class="sapMOHLastDivider"></div>
+                </div>
+                <div id="__bar1" data-sap-ui="__bar1" class="sapMITB sapMITBBackgroundDesignTranslucent sapMITBNoContentPadding">
+
+                    <div role="tablist" id="woobjecttabs" class="sapContrastPlus sapMITBNotScrollable sapMITH sapMITHBackgroundDesignTranslucent sapMITHOverflowList">
+						<span id="__bar1--header-arrowScrollLeft" data-sap-ui="__bar1--header-arrowScrollLeft" role="presentation" aria-hidden="true" data-sap-ui-icon-content="" class="sapMITBArrowScroll sapMITBArrowScrollLeft sapUiIcon sapUiIconMirrorInRTL" style="font-family:'SAP-icons'"></span>
+                        <div id="__bar1--header-scrollContainer" aria-hidden="true" class="sapMITBScrollContainer" style="overflow: hidden;">
+                            <div id="__bar1--header-head" aria-hidden="true" class="sapMITBHead" tabindex="-1">
+
+                                <div role="tab" aria-controls="__bar2-content" onclick='$("#__bar2-content .sapUiSimpleForm").hide(); $("[aria-controls=__bar2-content]").attr("aria-selected","false").removeClass("sapMITBSelected"); $(this).attr("aria-selected","true").addClass("sapMITBSelected"); $("#__form1").show();' aria-posinset="1" aria-setsize="3" id="__filter0" aria-selected="false" class="sapMITBFilter sapMITBFilterDefault sapMITBItem sapMITBItemNoCount sapMITBVertical sapMITBSelected" tabindex="-1" style="">
+                                    <div id="__filter0-tab" class="sapMITBTab"><span id="__filter0-icon" data-sap-ui="__filter0-icon" role="presentation" aria-hidden="true" data-sap-ui-icon-content="" class="sapMITBFilterDefault sapMITBFilterIcon sapUiIcon sapUiIconMirrorInRTL" style="font-family:'SAP-icons'"></span><span id="__filter0-count" class="sapMITBCount"></span></div>
+                                    <div id="__filter0-text" class="sapMITBText">General</div>
+                                    <div class="sapMITBContentArrow"></div>
+                                </div>
+
+                                <div role="tab" aria-controls="__bar2-content" onclick='$("#__bar2-content .sapUiSimpleForm").hide(); $("[aria-controls=__bar2-content]").attr("aria-selected","false").removeClass("sapMITBSelected"); $(this).attr("aria-selected","true").addClass("sapMITBSelected"); $("#__form2").show();' aria-labelledby="__filter1-text __filter1-icon" aria-posinset="2" aria-setsize="3" id="__filter1" data-sap-ui="__filter1" aria-selected="true" class="sapMITBFilter sapMITBFilterDefault sapMITBItem sapMITBItemNoCount sapMITBVertical" tabindex="0" style="">
+                                    <div id="__filter1-tab" class="sapMITBTab"><span id="__filter1-icon" data-sap-ui="__filter1-icon" role="presentation" aria-hidden="true" data-sap-ui-icon-content="" class="sapMITBFilterDefault sapMITBFilterIcon sapUiIcon sapUiIconMirrorInRTL" style="font-family:'SAP-icons'"></span><span id="__filter1-count" class="sapMITBCount"></span></div>
+                                    <div id="__filter1-text" class="sapMITBText">Customer</div>
+                                    <div class="sapMITBContentArrow"></div>
+                                </div>
+
+                                <div role="tab" aria-controls="__bar2-content" onclick='$("#__bar2-content .sapUiSimpleForm").hide(); $("[aria-controls=__bar2-content]").attr("aria-selected","false").removeClass("sapMITBSelected"); $(this).attr("aria-selected","true").addClass("sapMITBSelected"); $("#__form3").show();' aria-labelledby="__filter2-text __filter2-icon" aria-posinset="3" aria-setsize="3" id="__filter2" data-sap-ui="__filter2" aria-selected="false" class="sapMITBFilter sapMITBFilterDefault sapMITBItem sapMITBItemNoCount sapMITBVertical" tabindex="-1" style="">
+                                    <div id="__filter2-tab" class="sapMITBTab"><span id="__filter2-icon" data-sap-ui="__filter2-icon" role="presentation" aria-hidden="true" data-sap-ui-icon-content="" class="sapMITBFilterDefault sapMITBFilterIcon sapUiIcon sapUiIconMirrorInRTL" style="font-family:'SAP-icons'"></span><span id="__filter2-count" class="sapMITBCount"></span></div>
+                                    <div id="__filter2-text" class="sapMITBText">Map</div>
+                                    <div class="sapMITBContentArrow"></div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <span id="__bar1--header-arrowScrollRight" role="presentation" aria-hidden="true" data-sap-ui-icon-content="" class="sapMITBArrowScroll sapMITBArrowScrollRight sapUiIcon sapUiIconMirrorInRTL" style="font-family:'SAP-icons'"></span>
+                        <button id="__bar1--header-overflow" title="More" class="sapMBtn sapMBtnBase" tabindex="-1"><span id="__bar1--header-overflow-inner" class="sapMBtnHoverable sapMBtnIconFirst sapMBtnInner sapMBtnTransparent sapMFocusable"><span id="__bar1--header-overflow-img" role="presentation" aria-hidden="true" data-sap-ui-icon-content="" class="sapMBtnCustomIcon sapMBtnIcon sapMBtnIconLeft sapUiIcon sapUiIconMirrorInRTL" style="font-family:'SAP-icons'"></span></span>
+                        </button>
+                    </div>
+                    <div id="__bar2-containerContent" class="sapMITBContainerContent">
+                        <div id="__bar2-content" class="sapMITBContent" role="tabpanel">
+<div id="__form1" data-sap-ui="__form1" class="sapUiSimpleForm" style="" aria-hidden="true">
+   <div id="__form1--Form" data-sap-ui="__form1--Form" data-sap-ui-customfastnavgroup="true" class="sapUiForm sapUiFormLblColon sapUiFormM" aria-readonly="true" role="form">
+      <div id="__form1--Layout" data-sap-ui="__form1--Layout" class="sapUiFormBackgrTranslucent sapUiFormResLayout">
+         <div id="__container2--RFLayout" data-sap-ui="__container2--RFLayout" class="sapUiRFL sapUiRLContainer">
+            <div id="__container2--RFLayout-row0" class="sapUiRFLCompleteRow sapUiRFLRow">
+               <div id="__element2--RFLayout-cont0_0" style="min-width:100px;width:100%" class="sapUiRFLContainer sapUiRFLFullLength">
+                  <div id="" class="sapUiRFLContainerContent">
+                     <div id="__element2--RFLayout" data-sap-ui="__element2--RFLayout" class="sapUiRFL sapUiRLElement sapUiRLElementWithLabel">
+                        <div id="__element2--RFLayout-row0" class="sapUiRFLRow">
+                           <div id="__label3-cont0_0" style="min-width:192px;width:37%" class="sapUiRFLContainer">
+                              <div id="" class="sapUiFormElementLbl sapUiRFLContainerContent sapUiRFLPaddingClass"><span id="__label3" data-sap-ui="__label3" style="width:100%;text-align:left" class="sapMLabel sapMLabelDisplayOnly sapUiFormLabel-CTX sapUiSelectable"><bdi id="__label3-bdi">Work description</bdi></span></div>
+                           </div>
+                           <div id="__text11-cont0_1" style="min-width:100px;width:63%" class="sapUiRFLContainer">
+                              <div id="" class="sapUiRFLContainerContent sapUiRFLPaddingClass"><span id="__text11" data-sap-ui="__text11" class="sapMText sapUiSelectable" style="width: 100%; text-align: left;"><span id="__text11-inner" class="sapMTextLineClamp sapMTextMaxLine" style="-webkit-line-clamp:10">INDIGENT INSTALLATION 99Q
+                                 * 20.04.2018 08:32:25 - Fredrik Nilsson (SC_FN)
+                                 Material</span></span>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>
+
+
+<div id="__form2" data-sap-ui="__form2" class="sapUiSimpleForm" style="display:none;"><div id="__form2--Form" data-sap-ui="__form2--Form" data-sap-ui-customfastnavgroup="true" class="sapUiForm sapUiFormLblColon sapUiFormM" aria-readonly="true" role="form"><div id="__form2--Layout" data-sap-ui="__form2--Layout" class="sapUiFormBackgrTranslucent sapUiFormResLayout"><div id="__container3--RFLayout" data-sap-ui="__container3--RFLayout" class="sapUiRFL sapUiRLContainer"><div id="__container3--RFLayout-row0" class="sapUiRFLCompleteRow sapUiRFLRow"><div id="__element3--RFLayout-cont0_0" style="min-width:100px;width:100%" class="sapUiRFLContainer sapUiRFLFullLength"><div id="" class="sapUiRFLContainerContent"><div id="__element3--RFLayout" data-sap-ui="__element3--RFLayout" class="sapUiRFL sapUiRLElement sapUiRLElementWithLabel"><div id="__element3--RFLayout-row0" class="sapUiRFLRow"><div id="__label4-cont0_0" style="min-width:192px;width:37%" class="sapUiRFLContainer"><div id="" class="sapUiFormElementLbl sapUiRFLContainerContent sapUiRFLPaddingClass"><span id="__label4" data-sap-ui="__label4" style="width:100%;text-align:left" class="sapMLabel sapMLabelDisplayOnly sapUiFormLabel-CTX sapUiSelectable"><bdi id="__label4-bdi">Name</bdi></span></div></div><div id="__text12-cont0_1" style="min-width:100px;width:63%" class="sapUiRFLContainer"><div id="" class="sapUiRFLContainerContent sapUiRFLPaddingClass"><span id="__text12" data-sap-ui="__text12" class="sapMText sapMTextNoWrap sapUiSelectable" style="width: 100%; text-align: left;">J NOVEMBER</span></div></div></div></div></div></div></div><div id="__container3--RFLayout-row1" class="sapUiRFLCompleteRow sapUiRFLRow"><div id="__element4--RFLayout-cont1_0" style="min-width:100px;width:100%" class="sapUiRFLContainer sapUiRFLFullLength"><div id="" class="sapUiRFLContainerContent"><div id="__element4--RFLayout" data-sap-ui="__element4--RFLayout" class="sapUiRFL sapUiRLElement sapUiRLElementWithLabel"><div id="__element4--RFLayout-row0" class="sapUiRFLRow"><div id="__label5-cont0_0" style="min-width:192px;width:37%" class="sapUiRFLContainer"><div id="" class="sapUiFormElementLbl sapUiRFLContainerContent sapUiRFLPaddingClass"><span id="__label5" data-sap-ui="__label5" style="width:100%;text-align:left" class="sapMLabel sapMLabelDisplayOnly sapUiFormLabel-CTX sapUiSelectable"><bdi id="__label5-bdi">Phone number</bdi></span></div></div><div id="__text13-cont0_1" style="min-width:100px;width:63%" class="sapUiRFLContainer"><div id="" class="sapUiRFLContainerContent sapUiRFLPaddingClass"><span id="__text13" data-sap-ui="__text13" class="sapMText sapMTextNoWrap sapUiSelectable" style="width: 100%; text-align: left;">000-0000000</span></div></div></div></div></div></div></div><div id="__container3--RFLayout-row2" class="sapUiRFLCompleteRow sapUiRFLRow"><div id="__element5--RFLayout-cont2_0" style="min-width:100px;width:100%" class="sapUiRFLContainer sapUiRFLFullLength"><div id="" class="sapUiRFLContainerContent"><div id="__element5--RFLayout" data-sap-ui="__element5--RFLayout" class="sapUiRFL sapUiRLElement sapUiRLElementWithLabel"><div id="__element5--RFLayout-row0" class="sapUiRFLRow"><div id="__label6-cont0_0" style="min-width:192px;width:37%" class="sapUiRFLContainer"><div id="" class="sapUiFormElementLbl sapUiRFLContainerContent sapUiRFLPaddingClass"><span id="__label6" data-sap-ui="__label6" style="width:100%;text-align:left" class="sapMLabel sapMLabelDisplayOnly sapUiFormLabel-CTX sapUiSelectable"><bdi id="__label6-bdi">Address</bdi></span></div></div><div id="__text14-cont0_1" style="min-width:100px;width:63%" class="sapUiRFLContainer"><div id="" class="sapUiRFLContainerContent sapUiRFLPaddingClass"><span id="__text14" data-sap-ui="__text14" class="sapMText sapMTextNoWrap sapUiSelectable" style="width: 100%; text-align: left;">MRS R TITUS, 41 GUAVA ROAD, TAFELSIG, MITCHELLS PLAIN</span></div></div></div></div></div></div></div></div></div></div></div>
+
+
+<div id="__form3" data-sap-ui="__form3" class="sapUiSimpleForm" style="display:none;" aria-hidden="true"><div id="__form3--Form" data-sap-ui="__form3--Form" data-sap-ui-customfastnavgroup="true" class="sapUiForm sapUiFormLblColon sapUiFormM" aria-readonly="true"role="form"><div id="__form3--Layout" data-sap-ui="__form3--Layout" class="sapUiFormBackgrTranslucent sapUiFormResLayout"><div id="__container4--RFLayout" data-sap-ui="__container4--RFLayout" class="sapUiRFL sapUiRLContainer"><div id="__container4--RFLayout-row0" class="sapUiRFLCompleteRow sapUiRFLRow"><div id="__element6--RFLayout-cont0_0" style="min-width:100px;width:100%" class="sapUiRFLContainer sapUiRFLFullLength"><div id="" class="sapUiRFLContainerContent"><div id="__element6--RFLayout" data-sap-ui="__element6--RFLayout" class="sapUiRFL sapUiRLElement sapUiRLElementWithLabel"><div id="__element6--RFLayout-row0" class="sapUiRFLRow"><div id="__label7-cont0_0" style="min-width:200px;width:37%" class="sapUiRFLContainer"><div id="" class="sapUiFormElementLbl sapUiRFLContainerContent sapUiRFLPaddingClass"><span id="__label7" data-sap-ui="__label7" dir="ltr" style="width:auto;text-align:left" class="sapMLabel sapMLabelDisplayOnly sapUiFormLabel-CTX sapUiSelectable"><bdi id="__label7-bdi">Current/Removed meter number</bdi></span></div></div><div id="__text15-cont0_1" style="min-width:100px;width:63%" class="sapUiRFLContainer"><div id="" class="sapUiRFLContainerContent sapUiRFLPaddingClass"><span id="__text15" data-sap-ui="__text15" dir="ltr" class="sapMText sapMTextNoWrap sapUiSelectable" style="width:200px;text-align:left">CSKC9039</span></div></div></div></div></div></div></div><div id="__container4--RFLayout-row1" class="sapUiRFLCompleteRow sapUiRFLRow"><div id="__element7--RFLayout-cont1_0" style="min-width:100px;width:100%" class="sapUiRFLContainer sapUiRFLFullLength"><div id="" class="sapUiRFLContainerContent"><div id="__element7--RFLayout" data-sap-ui="__element7--RFLayout" class="sapUiRFL sapUiRLElement sapUiRLElementWithLabel"><div id="__element7--RFLayout-row0" class="sapUiRFLRow"><div id="__label8-cont0_0" style="min-width:200px;width:37%" class="sapUiRFLContainer"><div id="" class="sapUiFormElementLbl sapUiRFLContainerContent sapUiRFLPaddingClass"><span id="__label8" data-sap-ui="__label8" style="width:auto;text-align:left" class="sapMLabel sapMLabelDisplayOnly sapUiFormLabel-CTX sapUiSelectable"><bdi id="__label8-bdi">Meter size</bdi></span></div></div><div id="__text16-cont0_1" style="min-width:100px;width:63%" class="sapUiRFLContainer"><div id="" class="sapUiRFLContainerContent sapUiRFLPaddingClass"><span id="__text16" data-sap-ui="__text16" class="sapMText sapMTextNoWrap sapUiSelectable" style="width: 100%; text-align: left;">W 15MM WDM FLOW</span></div></div></div></div></div></div></div><div id="__container4--RFLayout-row2" class="sapUiRFLCompleteRow sapUiRFLRow"><div id="__element8--RFLayout-cont2_0" style="min-width:100px;width:100%" class="sapUiRFLContainer sapUiRFLFullLength"><div id="" class="sapUiRFLContainerContent"><div id="__element8--RFLayout" data-sap-ui="__element8--RFLayout" class="sapUiRFL sapUiRLElement sapUiRLElementWithLabel"><div id="__element8--RFLayout-row0" class="sapUiRFLRow"><div id="__label9-cont0_0" style="min-width:200px;width:37%" class="sapUiRFLContainer"><div id="" class="sapUiFormElementLbl sapUiRFLContainerContent sapUiRFLPaddingClass"><span id="__label9" data-sap-ui="__label9" style="width:auto;text-align:left" class="sapMLabel sapMLabelDisplayOnly sapUiFormLabel-CTX sapUiSelectable"><bdi id="__label9-bdi">Device location notes</bdi></span></div></div><div id="__text17-cont0_1" style="min-width:100px;width:63%" class="sapUiRFLContainer"><div id="" class="sapUiRFLContainerContent sapUiRFLPaddingClass"><span id="__text17" data-sap-ui="__text17" class="sapMText sapMTextBreakWord sapUiSelectable" style="width:100%;text-align:left">U/C</span></div></div></div></div></div></div></div></div></div></div></div>
+                        </div>
+                    </div>
+                </div>
+
+            </section>
+
+
+        </div>
+    </div>
+</div>
+
+
+
+
+
+<!--
+         <div data-role="footer" data-position="fixed">
+            <h1>© 2018</h1>
+         </div>
+
+-->
+      </div>
+
+      <div data-role="page" id="wohist" data-dom-cache="true">
+         <div data-role="header">
+            <a class="ui-btn ui-btn-icon-left"
+               id="pending2menu" onclick='$.mobile.pageContainer.pagecontainer("change", "#menu");'></a>
+            <h1>Work Order History</h1>
+         </div>
+         <div data-role="main" class="ui-content">
+            <form class="ui-filterable">
+               <input data-type="search" id="txtKeywordHistory"/>
+            </form>
+            <ul data-role="listview" data-filter="true"
+               data-input="#txtKeywordHistory"
+               data-inset="true"
+               id="lstWoHistory"
+               >
+            </ul>
+         </div>
+         <div data-role="footer" data-position="fixed">
+            <h1>© 2018</h1>
+         </div>
+      </div>
+
+      <div data-role="page" id="map" data-dom-cache="true">
+         <a class="ui-btn ui-btn-icon-left"
+            id="map2menu" onclick='$.mobile.pageContainer.pagecontainer("change", "#menu");'></a>
+         <div data-role="main" class="ui-content">
+            <div id="mapcanvasall" style="height: 500px; width: 100%;"></div>
+         </div>
+         <div data-role="footer" data-position="fixed">
+            <h1>© 2018</h1>
+         </div>
+      </div>
+
+   </body>
+</html>
